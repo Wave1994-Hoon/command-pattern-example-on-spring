@@ -14,8 +14,6 @@ public class Project {
 
     private String name;
 
-    private String password;
-
     @Enumerated(EnumType.STRING)
     private ProjectStatusType status;
 }

@@ -40,6 +40,4 @@ public class CommandPatternApplication {
         projectRepository.save(project2);
         projectRepository.save(project3);
     }
-
-
 }
