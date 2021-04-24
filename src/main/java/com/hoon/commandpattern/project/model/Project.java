@@ -17,5 +17,5 @@ public class Project {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private ProjectStatusType role;
+    private ProjectStatusType status;
 }
