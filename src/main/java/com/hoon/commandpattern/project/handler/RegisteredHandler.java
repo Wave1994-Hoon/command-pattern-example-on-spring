@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @AllArgsConstructor
-public class ProceedHandler implements ProjectCommandHandler{
+public class RegisteredHandler implements ProjectCommandHandler{
 
     @Override
     @Transactional
     public void handle(ProjectContext projectContext) {
         Project project = projectContext.getProject();
-        project.setStatus(ProjectStatusType.PROCEED); // Dirty Check By Hibernate
+        project.setStatus(ProjectStatusType.REGISTERED); // Dirty Check By Hibernate
     }
 }

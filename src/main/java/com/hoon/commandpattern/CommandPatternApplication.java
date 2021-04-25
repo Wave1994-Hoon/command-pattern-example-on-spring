@@ -33,7 +33,7 @@ public class CommandPatternApplication {
 
         Project project3 = Project.builder()
                 .name("Project1")
-                .status(ProjectStatusType.REFUSE)
+                .status(ProjectStatusType.REJECT)
                 .build();
 
         projectRepository.save(project1);

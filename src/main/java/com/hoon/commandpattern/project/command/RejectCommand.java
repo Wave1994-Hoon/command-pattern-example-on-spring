@@ -1,20 +1,20 @@
 package com.hoon.commandpattern.project.command;
 
-import com.hoon.commandpattern.project.handler.ProceedHandler;
 import com.hoon.commandpattern.project.handler.ProjectCommandHandler;
+import com.hoon.commandpattern.project.handler.RejectHandler;
 import com.hoon.commandpattern.project.model.Project;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @Component
 @AllArgsConstructor
-public class ProceedCommand implements ProjectCommand {
+public class RejectCommand implements ProjectCommand{
 
     private final List<ProjectCommandHandler> handlers;
 
@@ -22,7 +22,7 @@ public class ProceedCommand implements ProjectCommand {
 
     @PostConstruct
     private void configureHandler() {
-        handlers.add(getHandler(ProceedHandler.class));
+        handlers.add(getHandler(RejectHandler.class));
     }
 
     public static ProjectContext createProjectContext(Project project) {
@@ -45,4 +45,5 @@ public class ProceedCommand implements ProjectCommand {
         handlers.forEach(handler -> handler.handle(projectContext));
         return projectContext.getProject();
     }
+
 }

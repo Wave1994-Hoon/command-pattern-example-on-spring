@@ -1,7 +1,6 @@
 package com.hoon.commandpattern.project;
 
-import com.hoon.commandpattern.project.command.ProceedCommand;
-import com.hoon.commandpattern.project.command.ProjectCommand;
+import com.hoon.commandpattern.project.command.*;
 import com.hoon.commandpattern.project.model.Project;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,11 +19,35 @@ public class ProjectStatusService {
     private final ProjectRepository projectRepository;
 
     @Transactional
+    public Project setProjectStatusIsRegistered(long projectId) {
+        Project project = getProjectWith(projectId);
+
+        ProjectCommand command = getAdFlowCommand(RegisteredCommand.class);
+        return command.execute(RegisteredCommand.createProjectContext(project));
+    }
+
+    @Transactional
     public Project setProjectStatusIsProceed(long projectId) {
         Project project = getProjectWith(projectId);
 
         ProjectCommand command = getAdFlowCommand(ProceedCommand.class);
         return command.execute(ProceedCommand.createProjectContext(project));
+    }
+
+    @Transactional
+    public Project setProjectStatusIsReject(long projectId) {
+        Project project = getProjectWith(projectId);
+
+        ProjectCommand command = getAdFlowCommand(RejectCommand.class);
+        return command.execute(RejectCommand.createProjectContext(project));
+    }
+
+    @Transactional
+    public Project setProjectStatusIsDone(long projectId) {
+        Project project = getProjectWith(projectId);
+
+        ProjectCommand command = getAdFlowCommand(DoneCommand.class);
+        return command.execute(DoneCommand.createProjectContext(project));
     }
 
     private Project getProjectWith(long projectId) {
