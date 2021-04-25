@@ -46,14 +46,12 @@ public class ProjectCommandExecutorAspect {
     }
 
     @AfterReturning("@annotation(ProjectCommandExecutor)")
-    public void afterReturning(JoinPoint joinPoint) {
-        System.out.println("AfterReturning");
-        System.out.println(ProjectContext.getThreadLocal());
+    public void afterReturning() {
         ProjectContext.unsetThreadLocal();
     }
 
     @AfterThrowing("@annotation(ProjectCommandExecutor)")
-    public void afterThrowing(JoinPoint joinPoint) {
+    public void afterThrowing() {
         ProjectContext.unsetThreadLocal();
     }
 }
