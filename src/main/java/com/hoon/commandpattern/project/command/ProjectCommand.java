@@ -1,6 +1,9 @@
 package com.hoon.commandpattern.project.command;
 
+import com.hoon.commandpattern.project.model.Project;
+
+
 public interface ProjectCommand {
 
-    ProjectContext execute(ProjectContext projectContext);
+    Project execute(ProjectContext projectContext);
 }

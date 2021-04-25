@@ -1,8 +1,8 @@
 package com.hoon.commandpattern.project.model;
 
 import lombok.*;
-
 import javax.persistence.*;
+
 
 @Builder
 @AllArgsConstructor @NoArgsConstructor

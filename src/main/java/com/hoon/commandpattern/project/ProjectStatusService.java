@@ -2,14 +2,14 @@ package com.hoon.commandpattern.project;
 
 import com.hoon.commandpattern.project.command.ProceedCommand;
 import com.hoon.commandpattern.project.command.ProjectCommand;
-import com.hoon.commandpattern.project.command.ProjectContext;
+import com.hoon.commandpattern.project.model.Project;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @Service
 @AllArgsConstructor
@@ -17,13 +17,20 @@ public class ProjectStatusService {
 
     private final List<ProjectCommand> commands;
     private final Map<Class<? extends ProjectCommand>, ProjectCommand> commandMap = new HashMap<>();
-
     private final ProjectRepository projectRepository;
 
     @Transactional
-    public ProjectContext setProjectStatusIsProceed(long projectId) {
+    public Project setProjectStatusIsProceed(long projectId) {
+        Project project = getProjectWith(projectId);
+
         ProjectCommand command = getAdFlowCommand(ProceedCommand.class);
-        return command.execute(ProceedCommand.createProjectContext(projectId));
+        return command.execute(ProceedCommand.createProjectContext(project));
+    }
+
+    private Project getProjectWith(long projectId) {
+        return projectRepository
+                .findById(projectId)
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private ProjectCommand getAdFlowCommand(Class<? extends ProjectCommand> clazz) {
@@ -36,5 +43,4 @@ public class ProjectStatusService {
                 .findAny()
                 .orElse(null);
     }
-
 }
