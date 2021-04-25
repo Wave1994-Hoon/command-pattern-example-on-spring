@@ -6,11 +6,12 @@
 - Class
   
     <br>
-    <img width="656" src="https://user-images.githubusercontent.com/60383031/115985623-accbd500-a5e7-11eb-917d-e8eabf964507.png">
+    <img width="656" src="https://user-images.githubusercontent.com/60383031/115995790-a81f1500-a617-11eb-8feb-f74fe83ddaf4.png">
+
 
 - Request Flow
 
     <br>
-    <img width="656" src="https://user-images.githubusercontent.com/60383031/115985714-0cc27b80-a5e8-11eb-9537-97668498b0c1.png">
+    <img width="656" src="https://user-images.githubusercontent.com/60383031/115995733-668e6a00-a617-11eb-9420-232c0e83ba28.png">
 
     
