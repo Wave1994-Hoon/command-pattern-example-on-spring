@@ -1,6 +1,7 @@
 package com.hoon.commandpattern.project;
 
 import com.hoon.commandpattern.project.command.*;
+import com.hoon.commandpattern.project.core.ProjectCommand;
 import com.hoon.commandpattern.project.model.Project;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,7 @@ public class ProjectStatusService {
 
     private <T> ProjectCommand findAdFlowCommand(Class<? extends ProjectCommand> clazz) {
         return commands.stream()
-                .filter(k -> clazz.isAssignableFrom(k.getClass()))
+                .filter(command -> clazz.isAssignableFrom(command.getClass()))
                 .findAny()
                 .orElse(null);
     }

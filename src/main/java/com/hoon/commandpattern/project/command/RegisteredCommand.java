@@ -1,7 +1,9 @@
 package com.hoon.commandpattern.project.command;
 
-import com.hoon.commandpattern.project.handler.ProceedHandler;
-import com.hoon.commandpattern.project.handler.ProjectCommandHandler;
+import com.hoon.commandpattern.project.core.ProjectCommand;
+import com.hoon.commandpattern.project.core.ProjectCommandHandler;
+import com.hoon.commandpattern.project.core.ProjectContext;
+import com.hoon.commandpattern.project.core.ProjectCommandExecutor;
 import com.hoon.commandpattern.project.handler.RegisteredHandler;
 import com.hoon.commandpattern.project.model.Project;
 import lombok.AllArgsConstructor;
@@ -37,11 +39,12 @@ public class RegisteredCommand implements ProjectCommand {
 
     private ProjectCommandHandler findProjectHandler(Class<? extends ProjectCommandHandler> clazz) {
         return handlers.stream()
-                .filter(k -> clazz.isAssignableFrom(k.getClass()) && clazz == k.getClass().getSuperclass())
+                .filter(handler -> clazz.isAssignableFrom(handler.getClass()) && clazz == handler.getClass().getSuperclass())
                 .findAny()
                 .orElse(null);
     }
 
+    @ProjectCommandExecutor
     @Transactional
     public Project execute(ProjectContext projectContext) {
         handlers.forEach(handler -> handler.handle(projectContext));

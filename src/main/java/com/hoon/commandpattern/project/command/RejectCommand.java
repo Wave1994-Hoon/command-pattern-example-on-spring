@@ -1,6 +1,9 @@
 package com.hoon.commandpattern.project.command;
 
-import com.hoon.commandpattern.project.handler.ProjectCommandHandler;
+import com.hoon.commandpattern.project.core.ProjectCommand;
+import com.hoon.commandpattern.project.core.ProjectCommandHandler;
+import com.hoon.commandpattern.project.core.ProjectContext;
+import com.hoon.commandpattern.project.core.ProjectCommandExecutor;
 import com.hoon.commandpattern.project.handler.RejectHandler;
 import com.hoon.commandpattern.project.model.Project;
 import lombok.AllArgsConstructor;
@@ -14,7 +17,7 @@ import java.util.Map;
 
 @Component
 @AllArgsConstructor
-public class RejectCommand implements ProjectCommand{
+public class RejectCommand implements ProjectCommand {
 
     private final List<ProjectCommandHandler> handlers;
 
@@ -35,15 +38,15 @@ public class RejectCommand implements ProjectCommand{
 
     private ProjectCommandHandler findProjectHandler(Class<? extends ProjectCommandHandler> clazz) {
         return handlers.stream()
-                .filter(k -> clazz.isAssignableFrom(k.getClass()) && clazz == k.getClass().getSuperclass())
+                .filter(handler -> clazz.isAssignableFrom(handler.getClass()) && clazz == handler.getClass().getSuperclass())
                 .findAny()
                 .orElse(null);
     }
 
+    @ProjectCommandExecutor
     @Transactional
     public Project execute(ProjectContext projectContext) {
         handlers.forEach(handler -> handler.handle(projectContext));
         return projectContext.getProject();
     }
-
 }

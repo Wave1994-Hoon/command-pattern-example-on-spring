@@ -1,4 +1,4 @@
-package com.hoon.commandpattern.project.command;
+package com.hoon.commandpattern.project.core;
 
 import com.hoon.commandpattern.project.model.Project;
 
