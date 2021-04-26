@@ -4,12 +4,12 @@ import com.hoon.commandpattern.project.core.ProjectContext;
 import com.hoon.commandpattern.project.core.ProjectCommandHandler;
 import com.hoon.commandpattern.project.model.Project;
 import com.hoon.commandpattern.project.model.ProjectStatusType;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DoneHandler implements ProjectCommandHandler {
 
     @Override

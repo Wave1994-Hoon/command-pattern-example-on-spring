@@ -3,7 +3,7 @@ package com.hoon.commandpattern.project;
 import com.hoon.commandpattern.project.command.*;
 import com.hoon.commandpattern.project.core.ProjectCommand;
 import com.hoon.commandpattern.project.model.Project;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProjectStatusService {
 
     private final List<ProjectCommand> commands;

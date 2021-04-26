@@ -3,14 +3,14 @@ package com.hoon.commandpattern;
 import com.hoon.commandpattern.project.ProjectRepository;
 import com.hoon.commandpattern.project.model.Project;
 import com.hoon.commandpattern.project.model.ProjectStatusType;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CommandPatternApplication {
 
     private final ProjectRepository projectRepository;

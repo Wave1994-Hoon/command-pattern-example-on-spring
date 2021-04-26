@@ -6,7 +6,7 @@ import com.hoon.commandpattern.project.core.ProjectContext;
 import com.hoon.commandpattern.project.core.ProjectCommandExecutor;
 import com.hoon.commandpattern.project.handler.RegisteredHandler;
 import com.hoon.commandpattern.project.model.Project;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RegisteredCommand implements ProjectCommand {
 
     private final List<ProjectCommandHandler> handlers;
