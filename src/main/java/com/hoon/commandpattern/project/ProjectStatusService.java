@@ -16,14 +16,16 @@ import java.util.Map;
 public class ProjectStatusService {
 
     private final List<ProjectCommand> commands;
+
     private final Map<Class<? extends ProjectCommand>, ProjectCommand> commandMap = new HashMap<>();
+
     private final ProjectRepository projectRepository;
 
     @Transactional
     public Project setProjectStatusIsRegistered(long projectId) {
         Project project = getProjectWith(projectId);
 
-        ProjectCommand command = getAdFlowCommand(RegisteredCommand.class);
+        ProjectCommand command = getProjectCommand(RegisteredCommand.class);
         return command.execute(RegisteredCommand.createProjectContext(project));
     }
 
@@ -31,7 +33,7 @@ public class ProjectStatusService {
     public Project setProjectStatusIsProceed(long projectId) {
         Project project = getProjectWith(projectId);
 
-        ProjectCommand command = getAdFlowCommand(ProceedCommand.class);
+        ProjectCommand command = getProjectCommand(ProceedCommand.class);
         return command.execute(ProceedCommand.createProjectContext(project));
     }
 
@@ -39,7 +41,7 @@ public class ProjectStatusService {
     public Project setProjectStatusIsReject(long projectId) {
         Project project = getProjectWith(projectId);
 
-        ProjectCommand command = getAdFlowCommand(RejectCommand.class);
+        ProjectCommand command = getProjectCommand(RejectCommand.class);
         return command.execute(RejectCommand.createProjectContext(project));
     }
 
@@ -47,7 +49,7 @@ public class ProjectStatusService {
     public Project setProjectStatusIsDone(long projectId) {
         Project project = getProjectWith(projectId);
 
-        ProjectCommand command = getAdFlowCommand(DoneCommand.class);
+        ProjectCommand command = getProjectCommand(DoneCommand.class);
         return command.execute(DoneCommand.createProjectContext(project));
     }
 
@@ -57,11 +59,11 @@ public class ProjectStatusService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    private ProjectCommand getAdFlowCommand(Class<? extends ProjectCommand> clazz) {
-        return commandMap.computeIfAbsent(clazz, this::findAdFlowCommand);
+    private ProjectCommand getProjectCommand(Class<? extends ProjectCommand> clazz) {
+        return commandMap.computeIfAbsent(clazz, this::findProjectCommand);
     }
 
-    private <T> ProjectCommand findAdFlowCommand(Class<? extends ProjectCommand> clazz) {
+    private <T> ProjectCommand findProjectCommand(Class<? extends ProjectCommand> clazz) {
         return commands.stream()
                 .filter(command -> clazz.isAssignableFrom(command.getClass()))
                 .findAny()

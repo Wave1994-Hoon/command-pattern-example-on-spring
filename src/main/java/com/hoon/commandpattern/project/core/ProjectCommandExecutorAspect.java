@@ -1,7 +1,6 @@
 package com.hoon.commandpattern.project.core;
 
 import com.google.common.util.concurrent.Striped;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
